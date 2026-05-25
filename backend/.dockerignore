@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+venv/
+.pytest_cache/
+alembic/versions/*
+!alembic/versions/.gitkeep

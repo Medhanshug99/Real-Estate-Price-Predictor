@@ -1,0 +1,29 @@
+# Node
+node_modules/
+dist/
+build/
+.vite/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.pytest_cache/
+alembic.ini
+
+# Environment variables
+.env
+.env.local
+
+# Models and Data
+backend/app/ml/artifacts/*.joblib
+data/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# User specific exclusions
+real_estate_prd.txt

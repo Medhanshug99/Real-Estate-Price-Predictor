@@ -1,0 +1,40 @@
+{
+    "best_model": "Random Forest",
+    "timestamp": "2026-05-25T08:49:37.408562",
+    "metrics": {
+        "Linear Regression": {
+            "R2": 0.7993270139166045,
+            "MAE": 2409857.859651699,
+            "RMSE": 3529974.045282295
+        },
+        "Random Forest": {
+            "R2": 0.8623312866373154,
+            "MAE": 1947399.7120484167,
+            "RMSE": 2923779.9419119814
+        },
+        "Gradient Boosting": {
+            "R2": 0.8598329343289278,
+            "MAE": 1879008.1042554723,
+            "RMSE": 2950190.4065772025
+        }
+    },
+    "features": {
+        "categorical": [
+            "city",
+            "property_type",
+            "furnishing_status",
+            "property_age"
+        ],
+        "numerical": [
+            "area_sqft",
+            "bedrooms",
+            "bathrooms",
+            "has_pool",
+            "has_parking",
+            "has_garden",
+            "has_renovated",
+            "has_furnished",
+            "has_luxury"
+        ]
+    }
+}
