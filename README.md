@@ -1,6 +1,6 @@
 # Real Estate Price Prediction & Property Recommendation System
 
-A modern, full-stack machine learning application for predicting real estate prices and recommending properties based on user preferences. Built with a robust architecture following professional engineering standards.
+A modern, **full-stack machine learning application** for predicting real estate prices and recommending properties based on user preferences. Built with a robust architecture following professional engineering standards.
 
 ## Architecture Overview
 
