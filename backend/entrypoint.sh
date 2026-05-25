@@ -18,7 +18,11 @@ echo "⬆️  Running Alembic migrations..."
 alembic upgrade head
 
 echo "🔢 Generating dataset if missing..."
-python app/ml/dataset_generator.py
+if [ ! -f "data/raw/real_estate_data.csv" ] && [ ! -f "../data/raw/real_estate_data.csv" ]; then
+  python app/ml/dataset_generator.py
+else
+  echo "   Dataset already exists, skipping generation."
+fi
 
 echo "🤖 Training ML model if not already trained..."
 if [ ! -f "app/ml/artifacts/best_model.joblib" ]; then
