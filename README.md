@@ -4,7 +4,7 @@ A modern, full-stack machine learning application for predicting real estate pri
 
 ## Architecture Overview
 
-- **Frontend**: React + TypeScript + Vite + TailwindCSS. Uses Lucide React for iconography.
+- **Frontend**: React + TypeScript + Vite + TailwindCSS.
 - **Backend**: FastAPI + Python. Follows a modular, service-oriented architecture with dependency injection and Pydantic validation.
 - **Machine Learning**: Scikit-Learn pipeline using Random Forest Regressor, with an automated training script and joblib serialization.
 - **Database**: PostgreSQL with SQLAlchemy ORM and Alembic for migrations.
