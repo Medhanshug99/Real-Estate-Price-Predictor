@@ -101,10 +101,11 @@ export default function RecommendationsPage() {
       if (data.success) {
         setProperties(data.data ?? []);
       } else {
-        setError('Failed to load recommendations.');
+        const backendError = data.errors?.[0] || 'Unknown backend error';
+        setError(`Backend Error: ${backendError}`);
       }
     } catch {
-      setError('Could not reach the server. Make sure the backend is running.');
+      setError('Could not reach the server. Make sure the backend is running and URL is correct.');
     } finally {
       setLoading(false);
     }

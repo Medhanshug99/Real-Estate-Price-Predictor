@@ -42,7 +42,11 @@ class PredictionService:
         df = pd.DataFrame(data)
         df = extract_nlp_features(df)
         
+        import time
+        start = time.perf_counter()
         prediction = self.model.predict(df)[0]
+        duration = time.perf_counter() - start
+        logger.info(f"Prediction computed in {duration:.3f}s")
         return float(prediction)
 
 prediction_service = PredictionService()
