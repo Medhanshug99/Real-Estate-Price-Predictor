@@ -31,4 +31,5 @@ echo "🌱 Seeding database..."
 python scripts/seed.py
 
 echo "🚀 Starting FastAPI server..."
-exec uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+PORT=${PORT:-8000}
+exec uvicorn app.main:app --host 0.0.0.0 --port $PORT
