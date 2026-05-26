@@ -89,3 +89,4 @@ A full-stack web application that predicts real estate prices and recommends pro
 
 ## License
 
+This project is licensed under the MIT License.
