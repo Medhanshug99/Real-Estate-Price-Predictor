@@ -15,6 +15,11 @@ except Exception as e:
 done
 
 echo "⬆️  Running Alembic migrations..."
+# If alembic can't find the current revision (stale DB state), stamp it first
+if ! alembic current 2>&1 | grep -q "head"; then
+  echo "   Stamping DB to handle missing/stale revision..."
+  alembic stamp head || true
+fi
 alembic upgrade head
 
 echo "🔢 Skipping dataset generation for Render..."
