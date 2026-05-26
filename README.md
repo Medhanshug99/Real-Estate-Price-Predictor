@@ -1,38 +1,72 @@
-# Real Estate Price Prediction & Property Recommendation System
+# Real Estate Price Predictor & Recommendation Engine
 
-A modern, **full-stack machine learning application** for predicting real estate prices and recommending properties based on user preferences. Built with a robust architecture following professional engineering standards.
+A full-stack web application that predicts real estate prices and recommends properties based on user preferences. Instead of just a simple script, this is built as a complete product with a clean user interface, a modular API, and a custom machine learning pipeline.
 
-## Architecture Overview
+## Features
 
-- **Frontend**: React + TypeScript + Vite + TailwindCSS.
-- **Backend**: FastAPI + Python. Follows a modular, service-oriented architecture with dependency injection and Pydantic validation.
-- **Machine Learning**: Scikit-Learn pipeline using Random Forest Regressor, with an automated training script and joblib serialization.
-- **Database**: PostgreSQL with SQLAlchemy ORM and Alembic for migrations.
-- **Deployment**: Fully containerized using Docker and Docker Compose.
+- **Price Prediction Engine**: Users can input property details (location, sqft, bedrooms, etc.) and get an instant, ML-driven price estimate.
+- **Smart Recommendations**: Suggests similar properties based on budget, location, and property type.
+- **Modern Dashboard**: A responsive, clean frontend for searching properties and viewing pricing insights.
+- **Automated ML Pipeline**: Includes scripts to generate data, clean it, train multiple models (Linear Regression, Random Forest, Gradient Boosting), and save the best performer.
+- **Secure Backend**: Features JWT-based authentication for different user roles (buyer, seller, admin).
+- **Containerized**: Fully set up with Docker and Docker Compose for easy local development and deployment.
+
+## Skills & Technologies Used
+
+### Frontend
+- **React** (with TypeScript)
+- **TailwindCSS** for styling
+- **Vite** as the build tool
+- **Axios** for API communication
+
+### Backend & Machine Learning
+- **Python** (FastAPI)
+- **Scikit-Learn, Pandas, NumPy** for data processing and model training
+- **Pydantic** for strict data validation
+- **SQLAlchemy & Alembic** for database ORM and migrations
+
+### Infrastructure
+- **PostgreSQL** as the relational database
+- **Docker & Docker Compose** for containerization
+- **Git** for version control
 
 ## Folder Structure
 
-- `/backend`: FastAPI application, ML pipeline, Alembic migrations, DB models.
-- `/frontend`: React TypeScript frontend.
-- `/data`: Raw generated CSV datasets.
-- `docker-compose.yml`: Orchestrates DB, backend, and frontend containers.
+- `/backend`: Contains the FastAPI application, ML pipeline (`/app/ml`), Alembic migrations, and database models.
+- `/frontend`: The React TypeScript application.
+- `/data`: Raw and processed CSV datasets.
+- `docker-compose.yml`: Orchestrates the database, backend, and frontend containers.
 
 ## Setup Instructions
 
+### Using Docker (Recommended)
+
+1. Make sure you have Docker and Docker Compose installed.
+2. Run the following command in the root directory:
+   ```bash
+   docker compose up --build -d
+   ```
+3. To generate data, train the model, and seed the database, run these commands inside the backend container:
+   ```bash
+   docker exec -it real_estate_backend bash
+   python app/ml/dataset_generator.py
+   python app/ml/pipeline.py
+   alembic upgrade head
+   python scripts/seed.py
+   ```
+
 ### Local Development (Without Docker)
 
-1. **Database Setup**: Start a PostgreSQL instance on port 5432 with credentials matching `.env`.
+1. **Database**: Start a PostgreSQL instance on port 5432 with credentials matching the `.env` file.
 2. **Backend**:
    ```bash
    cd backend
    python -m venv venv
-   source venv/bin/activate  # or .\venv\Scripts\activate on Windows
+   source venv/bin/activate  # On Windows use: .\venv\Scripts\activate
    pip install -r requirements.txt
    
-   # Run Migrations
+   # Run Migrations, generate data, and train the model
    alembic upgrade head
-   
-   # Seed Data and Train ML
    python app/ml/dataset_generator.py
    python app/ml/pipeline.py
    python scripts/seed.py
@@ -47,28 +81,20 @@ A modern, **full-stack machine learning application** for predicting real estate
    npm run dev
    ```
 
-### Docker Setup
-
-```bash
-# Start all services
-docker compose up --build -d
-
-# Inside the backend container, generate data, train ML, and seed the DB
-docker exec -it real_estate_backend bash
-python app/ml/dataset_generator.py
-python app/ml/pipeline.py
-alembic upgrade head
-python scripts/seed.py
-```
-
 ## ML Workflow
 
-1. `dataset_generator.py`: Generates a highly realistic synthetic dataset with correlated numerical features and location multipliers.
-2. `pipeline.py`: Imputes missing values, encodes categorical variables, and performs lightweight keyword extraction using NLP. Evaluates multiple algorithms (Linear Regression, Random Forest, Gradient Boosting) and saves the best model (`best_model.joblib`) to `backend/app/ml/artifacts/`.
-3. `prediction_service.py`: Dynamically loads the artifact at runtime to provide instant inferences.
+1. `dataset_generator.py`: Generates a synthetic dataset with realistic correlated features.
+2. `pipeline.py`: Cleans data (handles missing values, encodes categories) and trains multiple regression models. The best model is serialized as `best_model.joblib`.
+3. `prediction_service.py`: The FastAPI backend loads this model into memory to serve fast, real-time predictions to the frontend.
 
-## Future Improvements
+## License
 
-- Add OAuth social login.
-- Implement collaborative filtering for recommendations.
-- Enhance the NLP extraction utilizing Transformer models.
+MIT License
+
+Copyright (c) 2024
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
